@@ -14,6 +14,9 @@ function SetScene() {
     SceneStarted = true;
     BufferStartAnimation()
     BufferButtonAnimation()
+    window.setTimeout(()=>{
+        startTween.restart()
+    },1000)
 
 }
 var lastSelected = ""

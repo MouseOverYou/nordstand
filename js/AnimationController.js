@@ -1,5 +1,5 @@
 var tween = gsap.timeline();
-var startTween = gsap.timeline();
+var startTween = gsap.timeline({onComplete: LockCam});
 var startCamTween = gsap.timeline();
 var infoReveal = gsap.timeline();
 var uiTween = gsap.timeline()
@@ -9,7 +9,10 @@ let origin = new BABYLON.Vector3(0, 0.26, 0);
 let pulseAnimRate = 1;
 let pulseAnimVector = new BABYLON.Vector3(1,1,1);
 
-
+function LockCam(){
+    console.log("camera locked")
+    camera.upperBetaLimit = 90 * (Math.PI / 180)
+}
 //rotate camera animations
 function TravelRotateCamTo(CurrentSelection) {
 
@@ -123,7 +126,8 @@ function BufferStartAnimation(){
     startTween.fromTo(scene.getTransformNodeByName("Welcome").rotation, {x: 180 * (Math.PI / 180)}, {x:  90 * (Math.PI / 180), duration: 2, ease: "elastic"},"<" );
     startTween.set(scene.getTransformNodeByName("Welcome").scaling, {x: 0.528, y: 0.804, z: 0.804},"<" );
     startTween.from(scene.getMeshByName("RB logo full Instance.1").scaling, {y: 0, duration: 0.5, ease: "back"},">0.5" );
-
+    startTween.pause()
+    
 
 }
 
