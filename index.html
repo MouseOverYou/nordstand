@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Nordson MesseStand</title>
+    <!-- Style-->
+    <link href="style.css" rel="stylesheet">
+    <link href="project-info-style.css" rel="stylesheet">
+    <!-- gsap animation-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.0.2/gsap.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <script src="https://cdn.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+    <script src="https://cdn.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
+    <script src="https://cdn.babylonjs.com/gui/babylon.gui.min.js"></script>
+    <script src="https://cdn.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
+    <script src="https://cdn.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
+    <script src="https://cdn.babylonjs.com/cannon.js"></script>
+    <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
+</head>
+
+<body>
+    <div id="fpsLabel"></div>
+    <div id="debugLabel">Key 1: First Person, Key 2: Rotate Camera, Key i: Start LiveStreaming</div>
+
+    <div id="video-overlay" class="video-overlay">
+        <a class="video-overlay-close">&times;</a>
+    </div>
+
+    <a class="back-zoom">&larr;</a>
+    <!-- INFOBOXEN -->
+    <div id="info-overlay" class="info-overlay">
+        <div id="infobox" class="infobox">
+            <img style="width: 75%" src="./assets/3d.png" alt="infotext">
+        </div>
+        <div id="video-box" class="videobox">
+            <img style="width: 75%" src="./assets/Linde_Videobox.png" alt="infotext">
+        </div>
+    </div>
+    <!-- INFOBOXEN END -->
+    <!-- CHATBOT WINDOW-->
+    <div class="project-overlay" id="project-chatbot">
+        <div class="project-content">
+            <div class="textbox" id="chatbot-text">
+                <h2>What´s in your mind?</h2>
+                <h1>Lets get to know each other!</h1>
+                <div id="typing-elem">
+                    <input type="text" value="" placeholder="reply here ...">
+                </div>
+            </div>
+
+            <div class="filmbox">
+                <p>Nordson<br>Heinrich-Hertz Strasse<br>D-40699 Erkrath<br><br>T +49 (0)2161-27758-00<br><br>sebastian@recordbay.de</p>
+                <h1>Contact us!</h1>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+
+    <!-- Project Information Overlay -->
+    <div class="bg-overlay"></div>
+    <a class="x-icon">&times;</a>
+    <div class="project-overlay" id="project-linde">
+        <div class="project-content">
+            <div class="textbox">
+                <h2>Konsequent wirtschaftlich</h2>
+                <h1>Nordson Industrial Coating Systems</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in facilisis felis. Fusce quis lectus 
+                    vulputate, volutpat neque ac, tincidunt.<br><br>Ulla non nunc sit amet velit vehicula aliquet. Praesent nulla felis, 
+                    facilisis nec tincidunt accumsan, tempus vitae nunc. Vivamus egestas aliquet nisl, eu blandit diam. Integer sed ligula 
+                    ornare, efficitur massa vel, vestibulum sapien.<br><br>Aenean quis tempor dui. Phasellus nulla magna, finibus non 
+                    justo at, vestibulum consectetur sapien. Etiam gravida velit id lacus suscipit sollicitudin.Ut sit amet felis tellus. 
+                    Cras posuere lacus in dui aliquet feugiat.</p>
+            </div>
+            <div class="filmbox">
+                <div class="film-values">
+                    <div style="padding:56.25% 0 0 0;position:relative;"><iframe width="100%" height="auto"
+                            src="https://www.youtube.com/embed/AuGFmMpWJx0"
+                            style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"
+                            style="width:100%;height:100%;"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+
+    <div class="project-overlay" id="project-deutsche-telekom">
+        <div class="project-content">
+            <div class="textbox">
+                <h2>Konsequent wirtschaftlich</h2>
+                <h1>Nordson Industrial Coating Systems</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in facilisis felis. Fusce quis lectus 
+                    vulputate, volutpat neque ac, tincidunt.<br><br>Ulla non nunc sit amet velit vehicula aliquet. Praesent nulla felis, 
+                    facilisis nec tincidunt accumsan, tempus vitae nunc. Vivamus egestas aliquet nisl, eu blandit diam. Integer sed ligula 
+                    ornare, efficitur massa vel, vestibulum sapien.<br><br>Aenean quis tempor dui. Phasellus nulla magna, finibus non 
+                    justo at, vestibulum consectetur sapien. Etiam gravida velit id lacus suscipit sollicitudin.Ut sit amet felis tellus. 
+                    Cras posuere lacus in dui aliquet feugiat.</p>
+            </div>
+            <div class="filmbox">
+                <div class="film-values">
+                    <div style="padding:56.25% 0 0 0;position:relative;"><iframe width="100%" height="auto"
+                            src="https://www.youtube.com/embed/AuGFmMpWJx0"
+                            style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"
+                            style="width:100%;height:100%;"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+
+
+    <div class="project-overlay" id="project-ssi-schaefer">
+        <div class="project-content">
+            <div class="textbox">
+                <h2>Konsequent wirtschaftlich</h2>
+                <h1>Pulverbeschichtungen mit Robotern</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in facilisis felis. Fusce quis lectus 
+                    vulputate, volutpat neque ac, tincidunt.<br><br>Ulla non nunc sit amet velit vehicula aliquet. Praesent nulla felis, 
+                    facilisis nec tincidunt accumsan, tempus vitae nunc. Vivamus egestas aliquet nisl, eu blandit diam. Integer sed ligula 
+                    ornare, efficitur massa vel, vestibulum sapien.<br><br>Aenean quis tempor dui. Phasellus nulla magna, finibus non 
+                    justo at, vestibulum consectetur sapien. Etiam gravida velit id lacus suscipit sollicitudin.Ut sit amet felis tellus. 
+                    Cras posuere lacus in dui aliquet feugiat.</p>
+            </div>
+            <div class="filmbox">
+                <div class="film-values">
+                    <div style="padding:56.25% 0 0 0;position:relative;"><iframe width="100%" height="auto"
+                            src="https://www.youtube.com/embed/AuGFmMpWJx0"
+                            style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"
+                            style="width:100%;height:100%;"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+
+    <div class="project-overlay" id="project-bayer-ag">
+        <div class="project-content">
+            <div class="textbox">
+                <h2>Konsequent wirtschaftlich</h2>
+                <h1>Nordson Industrial Coating Systems</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in facilisis felis. Fusce quis lectus 
+                    vulputate, volutpat neque ac, tincidunt.<br><br>Ulla non nunc sit amet velit vehicula aliquet. Praesent nulla felis, 
+                    facilisis nec tincidunt accumsan, tempus vitae nunc. Vivamus egestas aliquet nisl, eu blandit diam. Integer sed ligula 
+                    ornare, efficitur massa vel, vestibulum sapien.<br><br>Aenean quis tempor dui. Phasellus nulla magna, finibus non 
+                    justo at, vestibulum consectetur sapien. Etiam gravida velit id lacus suscipit sollicitudin.Ut sit amet felis tellus. 
+                    Cras posuere lacus in dui aliquet feugiat.</p>
+            </div>
+            <div class="filmbox">
+                <div class="film-values">
+                    <div style="padding:56.25% 0 0 0;position:relative;"><iframe width="100%" height="auto"
+                            src="https://www.youtube.com/embed/AuGFmMpWJx0"
+                            style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"
+                            style="width:100%;height:100%;"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+
+
+    <div class="project-overlay" id="project-bombardier">
+        <div class="project-content">
+            <div class="textbox">
+                <h2>Konsequent wirtschaftlich</h2>
+                <h1>Nordson Industrial Coating Systems</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in facilisis felis. Fusce quis lectus 
+                    vulputate, volutpat neque ac, tincidunt.<br><br>Ulla non nunc sit amet velit vehicula aliquet. Praesent nulla felis, 
+                    facilisis nec tincidunt accumsan, tempus vitae nunc. Vivamus egestas aliquet nisl, eu blandit diam. Integer sed ligula 
+                    ornare, efficitur massa vel, vestibulum sapien.<br><br>Aenean quis tempor dui. Phasellus nulla magna, finibus non 
+                    justo at, vestibulum consectetur sapien. Etiam gravida velit id lacus suscipit sollicitudin.Ut sit amet felis tellus. 
+                    Cras posuere lacus in dui aliquet feugiat.</p>
+            </div>
+            <div class="filmbox">
+                <div class="film-values">
+                    <div style="padding:56.25% 0 0 0;position:relative;"><iframe width="100%" height="auto"
+                            src="https://www.youtube.com/embed/AuGFmMpWJx0"
+                            style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"
+                            style="width:100%;height:100%;"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+
+
+    <div class="project-overlay" id="project-varycon">
+        <div class="project-content">
+            <div class="textbox">
+                <h2>Konsequent wirtschaftlich</h2>
+                <h1>Nordson Industrial Coating Systems</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in facilisis felis. Fusce quis lectus 
+                    vulputate, volutpat neque ac, tincidunt.<br><br>Ulla non nunc sit amet velit vehicula aliquet. Praesent nulla felis, 
+                    facilisis nec tincidunt accumsan, tempus vitae nunc. Vivamus egestas aliquet nisl, eu blandit diam. Integer sed ligula 
+                    ornare, efficitur massa vel, vestibulum sapien.<br><br>Aenean quis tempor dui. Phasellus nulla magna, finibus non 
+                    justo at, vestibulum consectetur sapien. Etiam gravida velit id lacus suscipit sollicitudin.Ut sit amet felis tellus. 
+                    Cras posuere lacus in dui aliquet feugiat.</p>
+            </div>
+            <div class="filmbox">
+                <div class="film-values">
+                    <div style="padding:56.25% 0 0 0;position:relative;"><iframe width="100%" height="auto"
+                            src="https://www.youtube.com/embed/AuGFmMpWJx0"
+                            style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"
+                            style="width:100%;height:100%;"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+
+    <!-- Project Information Overlay end -->
+
+    <video class="scene-vid" style="display:none" muted loop autoplay>
+        <source src="assets/all screens video.mp4" type="video/mp4" />
+    </video>
+    <!---video class="scene-vid" style="display:none" muted loop autoplay>
+        <source src="assets/screenVert_ref 4_1.mp4" type="video/mp4" />
+    </video>
+    <video class="scene-vid" style="display:none" muted loop autoplay>
+        <source src="assets/screenVert_ref 3.mp4" type="video/mp4" />
+    </video>
+    <video class="scene-vid" style="display:none" muted loop autoplay>
+        <source src="assets/screenVert_ref 4.mp4" type="video/mp4" />
+    </video>
+    <video class="scene-vid" style="display:none" muted loop autoplay>
+        <source src="assets/screenVert_ref 2.mp4" type="video/mp4" />
+    </video-->
+
+    <canvas id="renderCanvas" touch-action="none"></canvas> //touch-action="none" for best results from PEP
+
+    <script type="text/javascript" src="js/InputController.js"></script>
+    <script type="text/javascript" src='js/AnimationController.js'></script>
+    <script type="text/javascript" src='js/HelperFunctions.js'></script>
+    <script type="text/javascript" src='js/GameManager.js'></script>
+    <script type="text/javascript" src='js/ManipulateImported.js'></script>
+    <script type="text/javascript" src='js/MaterialManager.js'></script>
+    <script type="text/javascript" src='js/MeshLoaderCtrl.js'></script>
+    <script type="text/javascript" src='js/CameraManager.js'></script>
+    <script type="text/javascript" src='js/PostEffects.js'></script>
+    <script type="text/javascript" src='js/HandleStreaming.js'></script>
+    <script type="text/javascript" src='js/index.js'></script>
+    <script type="text/javascript" src='js/fakechatbot.js'></script>
+
+
+
+</body>
+
+</html>
